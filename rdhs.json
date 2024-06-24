@@ -1,0 +1,13 @@
+{
+  "email": "hnakambale@gmail.com",
+  "project": "Malaria Project_HN",
+  "password": "Northwestern@20",
+  "cache_path": "~/.cache/rdhs",
+  "config_path": "rdhs.json",
+  "global": false,
+  "verbose_download": false,
+  "verbose_setup": true,
+  "timeout": 30,
+  "data_frame": null,
+  "project_choice": null
+}
