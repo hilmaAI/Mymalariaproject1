@@ -1,5 +1,4 @@
-# ******************************************************************************
-# Program: 		ML_FEVER.R
+#Program: 		ML_FEVER.R
 # Purpose: 		Code indicators on fever, fever care-seeking, and antimalarial drugs  
 # Data inputs: 		KR survey list
 # Data outputs:		coded variables and tables
@@ -36,8 +35,7 @@
 # ml_artes_rec		"Child took Artesunate rectal"
 # ml_artes_inj		"Child took Artesunate injection or intravenous"
 # ml_antimal_other	"Child took other antimalarial"
-# -----------------------------------------------------------------------------#
-
+# -----------------------------------------------------------------------------
 # Fever and care-seeking 
 # Fever
 KRdata <- KRdata %>%
@@ -54,7 +52,7 @@ KRdata <- KRdata %>%
 KRdata <- KRdata %>%
   mutate(ml_fev_care = case_when(
     ml_fever==1 & !(h32a==1|h32b==1|h32c==1|h32d==1|h32e==1|h32f==1|h32g==1|h32h==1|h32i==1|h32j==1|
-                     h32k==1|h32l==1|h32m==1|h32n==1|h32o==1|h32p==1|h32q==1|h32r==1|h32s==1|h32u==1|h32v==1|h32w==1|h32x==1) ~ 0,
+                      h32k==1|h32l==1|h32m==1|h32n==1|h32o==1|h32p==1|h32q==1|h32r==1|h32s==1|h32u==1|h32v==1|h32w==1|h32x==1) ~ 0,
     ml_fever==1 & (h32a==1|h32b==1|h32c==1|h32d==1|h32e==1|h32f==1|h32g==1|h32h==1|h32i==1|h32j==1|
                      h32k==1|h32l==1|h32m==1|h32n==1|h32o==1|h32p==1|h32q==1|h32r==1|h32s==1|h32u==1|h32v==1|h32w==1|h32x==1) ~ 1,
     b5==0  ~ 99),
@@ -178,8 +176,8 @@ KRdata <- KRdata %>%
 
 KRdata <- KRdata %>%
   mutate(ml_antimal = case_when(
-    ml_fever==1 & !(ml13a==1|ml13b==1|ml13c==1|ml13d==1|ml13e==1|ml13f==1|ml13g==1|ml13h==1|ml13i==1|ml13j==1|ml13k==1) ~ 0,
-    ml_fever==1 & (ml13a==1|ml13b==1|ml13c==1|ml13d==1|ml13e==1|ml13f==1|ml13g==1|ml13h==1|ml13i==1|ml13j==1|ml13k==1) ~ 1,
+    ml_fever==1 & !(h37a==1|ml13g==1|ml13n==1|h37b==1|h37c==1|ml13d==1|ml13f==1|ml13e==1|h37h==1) ~ 0,
+    ml_fever==1 & (h37a==1|ml13g==1|ml13n==1|h37b==1|h37c==1|ml13d==1|ml13f==1|ml13e==1|h37h==1) ~ 1,
     b5==0  ~ 99),
     ml_antimal = set_label(ml_antimal, label = "Child took any antimalarial"))%>%
   replace_with_na(replace = list(ml_antimal = c(99)))
@@ -197,8 +195,8 @@ KRdata <- KRdata %>%
 # Child with fever in past 2 weeks took SP/Fansider
 KRdata <- KRdata %>%
   mutate(ml_sp_fan = case_when(
-    ml_fever==1 & ml_antimal==1 & ml13a!=1 ~ 0,
-    ml_fever==1 & ml_antimal==1 & ml13a==1 ~ 1,
+    ml_fever==1 & ml_antimal==1 & h37a!=1 ~ 0,
+    ml_fever==1 & ml_antimal==1 & h37a==1 ~ 1,
     b5==0  ~ 99),
     ml_sp_fan = set_label(ml_sp_fan, label = "Child took SP/Fansider"))%>%
   replace_with_na(replace = list(ml_sp_fan = c(99)))
@@ -206,8 +204,8 @@ KRdata <- KRdata %>%
 # Child with fever in past 2 weeks took Chloroquine
 KRdata <- KRdata %>%
   mutate(ml_chloro = case_when(
-    ml_fever==1 & ml_antimal==1 & ml13b!=1 ~ 0,
-    ml_fever==1 & ml_antimal==1 & ml13b==1 ~ 1,
+    ml_fever==1 & ml_antimal==1 & h37b!=1 ~ 0,
+    ml_fever==1 & ml_antimal==1 & h37b==1 ~ 1,
     b5==0  ~ 99),
     ml_chloro = set_label(ml_chloro, label = "Child took Chloroquine"))%>%
   replace_with_na(replace = list(ml_chloro = c(99)))
@@ -215,8 +213,8 @@ KRdata <- KRdata %>%
 # Child with fever in past 2 weeks took Amodiaquine
 KRdata <- KRdata %>%
   mutate(ml_amodia = case_when(
-    ml_fever==1 & ml_antimal==1 & ml13c!=1 ~ 0,
-    ml_fever==1 & ml_antimal==1 & ml13c==1 ~ 1,
+    ml_fever==1 & ml_antimal==1 & h37c!=1 ~ 0,
+    ml_fever==1 & ml_antimal==1 & h37c==1 ~ 1,
     b5==0  ~ 99),
     ml_amodia = set_label(ml_amodia, label = "Child took Amodiaquine"))%>%
   replace_with_na(replace = list(ml_amodia = c(99)))
@@ -230,12 +228,11 @@ KRdata <- KRdata %>%
     ml_quin_pill = set_label(ml_quin_pill, label = "Child took Quinine pills"))%>%
   replace_with_na(replace = list(ml_quin_pill = c(99)))
 
-
 # Child with fever in past 2 weeks took Quinine injection or intravenous (IV)  
 KRdata <- KRdata %>%
   mutate(ml_quin_inj = case_when(
-    ml_fever==1 & ml_antimal==1 & ml13da!=1 ~ 0,
-    ml_fever==1 & ml_antimal==1 & ml13da==1 ~ 1,
+    ml_fever==1 & ml_antimal==1 & ml13f!=1 ~ 0,
+    ml_fever==1 & ml_antimal==1 & ml13f==1 ~ 1,
     b5==0  ~ 99),
     ml_quin_inj = set_label(ml_quin_inj, label = "Child took Quinine injection or IV"))%>%
   replace_with_na(replace = list(ml_quin_inj = c(99)))
@@ -243,8 +240,8 @@ KRdata <- KRdata %>%
 # Child with fever in past 2 weeks took Artesunate rectal
 KRdata <- KRdata %>%
   mutate(ml_artes_rec = case_when(
-    ml_fever==1 & ml_antimal==1 & ml13aa!=1 ~ 0,
-    ml_fever==1 & ml_antimal==1 & ml13aa==1 ~ 1,
+    ml_fever==1 & ml_antimal==1 & ml13g!=1 ~ 0,
+    ml_fever==1 & ml_antimal==1 & ml13g==1 ~ 1,
     b5==0  ~ 99),
     ml_artes_rec = set_label(ml_artes_rec, label = "Child took Artesunate rectal"))%>%
   replace_with_na(replace = list(ml_artes_rec = c(99)))
@@ -252,19 +249,19 @@ KRdata <- KRdata %>%
 # Child with fever in past 2 weeks took Artesunate injection or intravenous
 KRdata <- KRdata %>%
   mutate(ml_artes_inj = case_when(
-    ml_fever==1 & ml_antimal==1 & ml13ab!=1 ~ 0,
-    ml_fever==1 & ml_antimal==1 & ml13ab==1 ~ 1,
+    ml_fever==1 & ml_antimal==1 & ml13n!=1 ~ 0,
+    ml_fever==1 & ml_antimal==1 & ml13n==1 ~ 1,
     b5==0  ~ 99),
     ml_artes_inj = set_label(ml_artes_inj, label = "Child took Artesunate injection or intravenous"))%>%
   replace_with_na(replace = list(ml_artes_inj = c(99)))
 
-# Child with fever in past 2 weeks took other a
-
 # Child with fever in past 2 weeks took other antimalarial
 KRdata <- KRdata %>%
   mutate(ml_antimal_other = case_when(
-    ml_fever==1 & ml_antimal==1 & ml13h!=1 ~ 0,
-    ml_fever==1 & ml_antimal==1 & ml13h==1 ~ 1,
+    ml_fever==1 & ml_antimal==1 & h37h!=1 ~ 0,
+    ml_fever==1 & ml_antimal==1 & h37h==1 ~ 1,
     b5==0  ~ 99),
     ml_antimal_other = set_label(ml_antimal_other, label = "Child took other antimalarial"))%>%
   replace_with_na(replace = list(ml_antimal_other = c(99)))
+
+

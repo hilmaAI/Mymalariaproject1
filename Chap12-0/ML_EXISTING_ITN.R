@@ -4,7 +4,7 @@
 # Data inputs: 		HR survey list
 # Data outputs:		coded variables
 # Author:		Hilma Nakambale
-# Date last modified: June 24, 2024
+# Date last modified: June 30, 2024
 # ******************************************************************************
 # -----------------------------------------------------------------------------#
 # # Variables created in this file:
@@ -29,7 +29,7 @@ names(HRdata_long2)[names(HRdata_long2) == c("value")] <- c("hml21")
 HRdata_long <- merge(HRdata_long1,
                                HRdata_long2, by = c("hhid", "idx"))
 
-myvars <- c("hhid","hv005","hv025", "shregion", "hv270")
+myvars <- c("hhid","hv005","hv025", "hv024", "hv270")
 
 HRdata_long3 <- (as.data.frame(HRdata[myvars]))
 
@@ -59,7 +59,7 @@ HRdata_long <- HRdata_long %>%
 table_temp <-  HRdata_long %>% 
   filter(ml_ownnet==1) %>% 
   calc_cro_rpct(
-    cell_vars = list(hv025, shregion, hv270, total()),
+    cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_sleepnet),
     weight = wt,
     total_label = "N",

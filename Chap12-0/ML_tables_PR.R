@@ -2,8 +2,8 @@
 # Program: 			  ML_tables_PR.R
 # Purpose: 		    produce tables for indicators
 # Data outputs:		tables on screen and in excel sheets
-# Author:				 Hilma Nakambale
-# Date last modified: June 29, 2024
+# Author:				  Hilma Nakambale
+# Date last modified: June 30, 2024
 # ******************************************************************************
 # Note this do file will produce the following tables in excel:
 # 3. Tables_MAL_ANEMIA:	Contains the table for children 6–59 months old tested for anemia and tables for children with severe anemia (<8.0 g/dL)
@@ -32,7 +32,7 @@ PRdata <- PRdata %>%
 table_temp <-  PRdata %>% 
   filter(hv103==1) %>%
   calc_cro_rpct(
-    cell_vars = list(age,hv104,hv025, shcounty, hv270, total()),
+    cell_vars = list(age,hv104,hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_net),
     weight = wt,
     total_label = "N",
@@ -46,7 +46,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_slept_net",append=TRUE)
 table_temp <-  PRdata %>% 
   filter(hv103==1) %>%
   calc_cro_rpct(
-    cell_vars = list(age,hv104,hv025, shcounty, hv270, total()),
+    cell_vars = list(age,hv104,hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_itn),
     weight = wt,
     total_label = "N",
@@ -60,7 +60,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_slept_itn",append=TRUE)
 table_temp <-  PRdata %>% 
   filter(hv103==1 & hml16<5) %>%
   calc_cro_rpct(
-    cell_vars = list(hv104,hv025, shcounty, hv270, total()),
+    cell_vars = list(hv104,hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_net),
     weight = wt,
     total_label = "N",
@@ -74,7 +74,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_chld_net",append=TRUE)
 table_temp <-  PRdata %>% 
   filter(hv103==1 & hml16<5) %>%
   calc_cro_rpct(
-    cell_vars = list(hv104,hv025, shcounty, hv270, total()),
+    cell_vars = list(hv104,hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_itn),
     weight = wt,
     total_label = "N",
@@ -88,7 +88,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_chld_itn",append=TRUE)
 table_temp <-  PRdata %>% 
   filter(hv103==1 & hv104==2 & hml18==1 & hml16>=15 & hml16<=49) %>%
   calc_cro_rpct(
-    cell_vars = list(hv025, shcounty, hv270, total()),
+    cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_net),
     weight = wt,
     total_label = "N",
@@ -102,7 +102,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_preg_net",append=TRUE)
 table_temp <-  PRdata %>% 
   filter(hv103==1 & hv104==2 & hml18==1 & hml16>=15 & hml16<=49) %>%
   calc_cro_rpct(
-    cell_vars = list(hv025, shcounty, hv270, total()),
+    cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_itn),
     weight = wt,
     total_label = "N",
@@ -118,7 +118,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_preg_itn",append=TRUE)
 # Tested for Anemia
 table_temp <-  PRdata %>% 
   calc_cro_rpct(
-    cell_vars = list(hc27,hv025, shcounty, hv270, total()),
+    cell_vars = list(hc27,hv025, hv024, hv270, total()),
     col_vars = list(ml_test_anemia),
     # weight = wt,
     total_label = "N",
@@ -131,7 +131,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_tested",append=TRUE)
 # Children with hemoglobin lower than 8.0 g/dl
 table_temp <-  PRdata %>% 
     calc_cro_rpct(
-      cell_vars = list(hc27,hv025, shcounty, hv270, total()),
+      cell_vars = list(hc27,hv025, hv024, hv270, total()),
       col_vars = list(ml_anemia),
       weight = wt,
       total_label = "N",
@@ -144,7 +144,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_tested_chld",append=TRU
 # Testing of Parasitemia (via microscopy) in children 6-59 months
 table_temp <-  PRdata %>% 
   calc_cro_rpct(
-    cell_vars = list(hc27,hv025, shcounty, hv270, total()),
+    cell_vars = list(hc27,hv025, hv024, hv270, total()),
     col_vars = list(ml_test_micmal),
    # weight = wt,
     total_label = "N",
@@ -157,7 +157,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_tstmicro_chld",append=T
 # Parasitemia (via microscopy) in children 6-59 months
 table_temp <-  PRdata %>% 
   calc_cro_rpct(
-    cell_vars = list(hc27,hv025, shcounty, hv270, total()),
+    cell_vars = list(hc27,hv025, hv024, hv270, total()),
     col_vars = list(ml_micmalpos),
     weight = wt,
     total_label = "N",
@@ -170,7 +170,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_micro_chld",append=TRUE
 # Testing of Parasitemia (via RDT) in children 6-59 months
 table_temp <-  PRdata %>% 
     calc_cro_rpct(
-      cell_vars = list(hc27,hv025, shcounty, hv270, total()),
+      cell_vars = list(hc27,hv025, hv024, hv270, total()),
       col_vars = list(ml_test_rdtmal),
      # weight = wt,
       total_label = "N",
@@ -183,7 +183,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_tstRDT_chld",append=TRU
 # Parasitemia (via RDT) in children 6-59 months
 table_temp <-  PRdata %>% 
     calc_cro_rpct(
-      cell_vars = list(hc27,hv025, shcounty, hv270, total()),
+      cell_vars = list(hc27,hv025, hv024, hv270, total()),
       col_vars = list(ml_rdtmalpos),
       weight = wt,
       total_label = "N",

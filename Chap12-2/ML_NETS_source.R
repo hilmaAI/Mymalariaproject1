@@ -4,7 +4,7 @@
 # Data inputs: 		HR survey list
 # Data outputs:		coded variables and tables
 # Author:		Hilma Nakambale
-# Date last modified: June 24, 2024
+# Date last modified: June 29, 2024
 # ******************************************************************************
 # -----------------------------------------------------------------------------#
 # # Variables created in this file:
@@ -30,7 +30,7 @@ names(HRdata_long2)[names(HRdata_long2) == c("value")] <- c("hml23")
 HRdata_long <- merge(HRdata_long1,
                      HRdata_long2, by = c("hhid", "idx"))
 
-myvars <- c("hhid","hv005","hv025", "shregion", "hv270")
+myvars <- c("hhid","hv005","hv025", "shcounty", "hv270")
 
 HRdata_long3 <- (as.data.frame(HRdata[myvars]))
 
@@ -82,7 +82,7 @@ HRdata_long <- HRdata_long %>%
 # Source of mosquito nets
 table_temp <-  HRdata_long %>% 
   calc_cro_rpct(
-    cell_vars = list(hv025, shregion, hv270, total()),
+    cell_vars = list(hv025, shcounty, hv270, total()),
     col_vars = list(ml_net_source),
     weight = wt,
     total_label = "N",

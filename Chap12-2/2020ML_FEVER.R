@@ -178,8 +178,8 @@ KRdata <- KRdata %>%
 
 KRdata <- KRdata %>%
   mutate(ml_antimal = case_when(
-    ml_fever==1 & !(ml13a==1|ml13b==1|ml13c==1|ml13d==1|ml13e==1|ml13f==1|ml13g==1|ml13h==1|ml13i==1|ml13j==1|ml13k==1) ~ 0,
-    ml_fever==1 & (ml13a==1|ml13b==1|ml13c==1|ml13d==1|ml13e==1|ml13f==1|ml13g==1|ml13h==1|ml13i==1|ml13j==1|ml13k==1) ~ 1,
+    ml_fever==1 & !(ml13a==1|ml13b==1|ml13c==1|ml13d==1|s413a==1|ml13f==1|ml13g==1|ml13h==1|ml13i==1|ml13j==1|ml13k==1) ~ 0,
+    ml_fever==1 & (ml13a==1|ml13b==1|ml13c==1|ml13d==1|s413a==1|ml13f==1|ml13g==1|ml13h==1|ml13i==1|ml13j==1|ml13k==1) ~ 1,
     b5==0  ~ 99),
     ml_antimal = set_label(ml_antimal, label = "Child took any antimalarial"))%>%
   replace_with_na(replace = list(ml_antimal = c(99)))
@@ -188,8 +188,8 @@ KRdata <- KRdata %>%
 # Child with fever in past 2 weeks took an ACT
 KRdata <- KRdata %>%
   mutate(ml_act = case_when(
-    ml_fever==1 & ml_antimal==1 & ml13e!=1 ~ 0,
-    ml_fever==1 & ml_antimal==1 & ml13e==1 ~ 1,
+    ml_fever==1 & ml_antimal==1 & s413a!=1 ~ 0,
+    ml_fever==1 & ml_antimal==1 & s413a==1 ~ 1,
     b5==0  ~ 99),
     ml_act = set_label(ml_act, label = "Child took an ACT"))%>%
   replace_with_na(replace = list(ml_act = c(99)))

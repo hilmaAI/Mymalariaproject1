@@ -14,8 +14,8 @@ IRdata <- IRdata %>%
 
 #  Percentage who received one or more doses of SP/Fansidar
 table_temp <-  IRdata %>% 
-calc_cro_rpct(
-    cell_vars = list(v025, sregion, v106, v190, total()),
+  calc_cro_rpct(
+    cell_vars = list(v025, scounty, v106, v190, total()),
     col_vars = list(ml_one_iptp),
     weight = wt,
     total_label = "N",
@@ -28,7 +28,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "ir_sp1",append=TRUE)
 #  Percentage who received two or more doses of SP/Fansidar
 table_temp <-  IRdata %>% 
   calc_cro_rpct(
-    cell_vars = list(v025, sregion, v106, v190, total()),
+    cell_vars = list(v025, scounty, v106, v190, total()),
     col_vars = list(ml_two_iptp),
     weight = wt,
     total_label = "N",
@@ -41,7 +41,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "ir_sp2",append=TRUE)
 #  Percentage who received three or more doses of SP/Fansidar
 table_temp <-  IRdata %>% 
   calc_cro_rpct(
-    cell_vars = list(v025, sregion, v106, v190, total()),
+    cell_vars = list(v025, scounty, v106, v190, total()),
     col_vars = list(ml_three_iptp),
     weight = wt,
     total_label = "N",

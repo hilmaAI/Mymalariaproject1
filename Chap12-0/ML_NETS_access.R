@@ -4,7 +4,7 @@
 # Data inputs: 		HR and PR survey list
 # Data outputs:		coded variables and tables
 # Author:		Hilma Nakambale
-# Date last modified: June 24, 2024
+# Date last modified: June 30, 2024
 # ******************************************************************************
 # -----------------------------------------------------------------------------#
 # # Variables created in this file:
@@ -70,7 +70,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_itn_bynumbperson",appen
 table_temp = HRmerge %>%
   filter(hv103==1) %>%
   tab_cells(ml_pop_access) %>%
-  tab_rows(numdefacto,hv025, shregion, hv270,total()) %>% 
+  tab_rows(numdefacto,hv025, hv024, hv270,total()) %>% 
   tab_weight(wt) %>% 
   tab_stat_fun(Mean = w_mean, "Weighted N" = w_n, method = list) %>%
   tab_pivot() %>% 
@@ -110,7 +110,7 @@ HRmerge <- HRmerge %>%
 table_temp <-  HRmerge %>% 
   filter(hv103==1) %>%
   calc_cro_rpct(
-    cell_vars = list(age, hv104, hv025, shregion, hv270, total()),
+    cell_vars = list(age, hv104, hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_itn_hhitn),
     weight = wt,
     total_label = "N",
@@ -124,7 +124,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_slept_1itn",append=TRUE
 table_temp <-  HRmerge %>% 
   filter(hv103==1 & hml16<5) %>%
   calc_cro_rpct(
-    cell_vars = list(hv025, shregion, hv270, total()),
+    cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_itn_hhitn),
     weight = wt,
     total_label = "N",
@@ -139,7 +139,7 @@ write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_chldslept_1itn",append=
 table_temp <-  HRmerge %>% 
   filter(hv103==1 & hv104==2 & hml18==1 & hml16>=15 & hml16<=49) %>%
   calc_cro_rpct(
-    cell_vars = list(hv025, shregion, hv270, total()),
+    cell_vars = list(hv025, hv024, hv270, total()),
     col_vars = list(ml_slept_itn_hhitn),
     weight = wt,
     total_label = "N",

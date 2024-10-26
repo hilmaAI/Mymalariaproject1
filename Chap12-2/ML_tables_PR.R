@@ -2,8 +2,8 @@
 # Program: 			  ML_tables_PR.R
 # Purpose: 		    produce tables for indicators
 # Data outputs:		tables on screen and in excel sheets
-# Author:				 Hilma Nakambale
-# Date last modified: June 29, 2024
+# Author:				  Hilma Nakambale 
+# Date last modified: June 30, 2024
 # ******************************************************************************
 # Note this do file will produce the following tables in excel:
 # 3. Tables_MAL_ANEMIA:	Contains the table for children 6–59 months old tested for anemia and tables for children with severe anemia (<8.0 g/dL)
@@ -192,3 +192,4 @@ table_temp <-  PRdata %>%
     set_caption("Parasitemia (via RDT) in children 6-59 months")
   
 write.xlsx(table_temp, "Tables_ML.xlsx", sheetName = "pr_RDT_chld",append=TRUE)
+
